@@ -22,6 +22,9 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
         
       - name: Set up Flutter and build
         uses: subosito/flutter-action@v2
@@ -30,7 +33,7 @@ jobs:
       - run: |
           flutter pub get
           flutter test
-          flutter build web
+          flutter build web --web-renderer html
 
       - name: Setup Pages
         if: github.ref == 'refs/heads/main'
