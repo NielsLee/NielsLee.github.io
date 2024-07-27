@@ -1,6 +1,6 @@
 baseURL = 'https://example.org/'
 languageCode = 'zh-cn'
 title = '峰峰的博客'
-theme = 'nostyleplease'
+theme = 'hugo-theme-stack'
 enableEmoji = 'true'
 hasCJKLanguage = 'true'
