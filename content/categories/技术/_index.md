@@ -2,6 +2,6 @@
 title: "技术"
 image: image.jpeg
 style:
-    background: "#2a9d8f"
+    background: "#deb887"
     color: "#fff"
 ---
