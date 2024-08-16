@@ -1,7 +1,7 @@
 ---
 title: '世界真是充满巧合'
 date: 2024-08-16T10:40:35+08:00
-draft: true
+draft: false
 tags: ['碎碎念']
 categories: ['生活']
 image: ''
