@@ -43,7 +43,7 @@ image: ''
 3. aapt在处理资源文件的时候，会将所有aar中的资源文件和apk本身的资源文件合并到一个R文件中，然后再将这个R文件中的所有变量设置为常量。然后，代码编译的过程中，**引用到R文件的地方直接内联为常量值**
 
 按照以上这些说法，在APK反编译以后，应该是不会看到如此多的R文件反编译得到的字节码的，**至少不应该每个包名下都有存在R文件字节码，因为R文件在打包的时候就已经合并成了一份了**。所以业务的Apk在打包的过程中，并没有将所有aar的R文件合并。顺着这个思路，我要到了业务的混淆配置文件，果然在其中发现了这样一段配置：
-```
+```pro
 -keep public class **.R$* {
     public static final int *;
 }
@@ -54,11 +54,11 @@ image: ''
 随后我进行了一系列验证，来搞明白我在研究这个问题的过程中产生的一系列疑问：
 ### 1. 这一段配置的作用是什么？
 考虑到混淆一个类通常是因为要使用反射调用，因此我让业务的开发帮忙去掉这段配置打了一个包，果不其然，在一些场景下APK无法正常运行了，其中有一个反射报错堆栈中有一行是这样的：
-```
+```text
 com.xxx.xxx.module.common.webview.BaseJsBridgeFragment$a.invoke(BaseJsBridgeFragment.kt:95)
 ```
 于是对业务Apk反编译，找到对应的包名下的这个方法，找到了这样一段字节码：
-```
+```java
 Method declaredMethod = ((Class) type2).getDeclaredMethod("inflate", LayoutInflater.class);
 
 ...
@@ -76,7 +76,7 @@ Object invoke = declaredMethod.invoke(null, aVar2);
         setContentView(R.layout.container_web_activity);
 ```
 然后分别打包两个Demo Apk，一个开启混淆并且配置keep R规则，另一个开启混淆但是不配置keep R规则，然后分别查看这段代码对应的字节码是怎样的。首先是没有keep R的Apk：
-```
+```class
 ...
 
 .method public onCreate(Landroid/os/Bundle;)V
@@ -93,7 +93,7 @@ Object invoke = declaredMethod.invoke(null, aVar2);
 ```
 可以看到，在调用setContentView这个方法之前，v0就已经被设置为常量0x7f0b0020了
 接下来看配置了keep R的Apk：
-```
+```class
 ...
 
 .method public final onCreate(Landroid/os/Bundle;)V
