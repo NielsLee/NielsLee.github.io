@@ -76,7 +76,7 @@ Object invoke = declaredMethod.invoke(null, aVar2);
         setContentView(R.layout.container_web_activity);
 ```
 然后分别打包两个Demo Apk，一个开启混淆并且配置keep R规则，另一个开启混淆但是不配置keep R规则，然后分别查看这段代码对应的字节码是怎样的。首先是没有keep R的Apk：
-```class
+```text
 ...
 
 .method public onCreate(Landroid/os/Bundle;)V
@@ -93,7 +93,7 @@ Object invoke = declaredMethod.invoke(null, aVar2);
 ```
 可以看到，在调用setContentView这个方法之前，v0就已经被设置为常量0x7f0b0020了
 接下来看配置了keep R的Apk：
-```class
+```text
 ...
 
 .method public final onCreate(Landroid/os/Bundle;)V
