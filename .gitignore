@@ -1,5 +1,13 @@
+# Hugo 构建产物
 public/
+resources/_gen/
+.hugo_build.lock
+
+# 本地 Hugo 工具链
 .hugo/
+
+# macOS
+.DS_Store
 
 # Obsidian 运行时（不提交）
 content/.obsidian/workspace.json
