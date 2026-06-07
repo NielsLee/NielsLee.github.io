@@ -1,7 +1,7 @@
 ---
 title: '理解中年男人为什么都爱炒股了'
 date: 2024-11-01T09:07:39+08:00
-draft: flase
+draft: false
 tags: ['碎碎念']
 categories: ['生活']
 image: ''

@@ -1,1 +1,12 @@
-{}
+{
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "./",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "post",
+  "useMarkdownLinks": true,
+  "newLinkFormat": "shortest",
+  "showFrontmatter": true,
+  "defaultViewMode": "source",
+  "showUnsupportedFiles": true,
+  "promptDelete": false
+}

@@ -4,3 +4,15 @@ title = '峰峰的博客'
 theme = 'hugo-theme-stack'
 enableEmoji = 'true'
 hasCJKLanguage = 'true'
+ignoreFiles = ['/_templates/', '/\\.obsidian/', '^Pasted image.*']
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+  [markup.highlight]
+    lineNos = true
+    guessSyntax = true
