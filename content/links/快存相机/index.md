@@ -13,6 +13,8 @@ toc: 'true'
 [FDroid下载](https://f-droid.org/packages/lying.fengfeng.snapsaver/)
 
 [隐私政策](/links/快存相机/privacy/)
+
+[技术支持](/links/快存相机/support/)
 ## 背景
 这是我做出来的第二款APP；在第一款小冰箱上架FDroid以后，我收到了一位用户的邮件；他在邮件里面点评了一番小冰箱以后，提出了另一个想法：
 
