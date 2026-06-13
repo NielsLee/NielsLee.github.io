@@ -11,10 +11,14 @@
             "id": "9d90598dbd797157",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "post/一点关于AI的感悟/index.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "index"
             }
           }
         ]
@@ -74,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 400.5
   },
   "right": {
     "id": "83db18cbd916b89f",
@@ -90,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "post/有一次测试/index.md",
+                "file": "post/一点关于AI的感悟/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -167,6 +171,14 @@
   },
   "active": "9d90598dbd797157",
   "lastOpenFiles": [
+    "post/一点关于AI的感悟/现阶段AI对我的影响-20260613163115.png",
+    "post/一点关于AI的感悟/一点关于AI的感悟-20260613175810.png",
+    "post/一点关于AI的感悟/现阶段AI对我的影响-20260613162244.png",
+    "post/一点关于AI的感悟/现阶段AI对我的影响-20260613163053.png",
+    "post/一点关于AI的感悟/现阶段AI对我的影响-20260613162101.png",
+    "post/一点关于AI的感悟/一点关于AI的感悟-20260613165505.png",
+    "post/一点关于AI的感悟/index.md",
+    "post/一点关于AI的感悟",
     "post/有一次测试/index.md",
     "post/有一次测试/有一次测试-20260607171811.png",
     "post/有一次测试/Pasted image 20260607171649.png",
@@ -174,7 +186,6 @@
     "post/有一次测试/Pasted image 20260607171051.png",
     "post/有一次测试",
     "post/使用Obsidian工作流创建新文章/index.md",
-    "Pasted image 20260607165722.png",
     "post/使用Obsidian工作流创建新文章"
   ]
 }
