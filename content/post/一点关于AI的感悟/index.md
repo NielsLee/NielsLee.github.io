@@ -1,7 +1,7 @@
 ---
 title: 一点关于AI的感悟
 date: 2026-06-13T15:42:21+08:00
-draft: true
+draft: false
 tags:
   - 碎碎念
 categories:
