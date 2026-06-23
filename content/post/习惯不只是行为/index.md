@@ -1,7 +1,7 @@
 ---
 title: '习惯不只是行为'
 date: 2025-05-23T21:37:56+08:00
-draft: true
+draft: false
 tags: ['碎碎念']
 categories: ['生活']
 image: ''
