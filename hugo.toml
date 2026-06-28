@@ -13,6 +13,7 @@ ignoreFiles = ['/_templates/', '/\\.obsidian/', '^Pasted image.*']
     enabled = true
     title = 'FOOTPRINT'
     boundaryData = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
+    chinaBoundaryData = '/data/china-boundary.topo.json'
     d3 = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js'
     topojson = 'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js'
 

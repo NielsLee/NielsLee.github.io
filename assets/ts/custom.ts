@@ -138,7 +138,8 @@ async function initFootprintWidget(widget: HTMLElement) {
     const d3Url = widget.dataset.d3Url;
     const topojsonUrl = widget.dataset.topojsonUrl;
     const boundaryUrl = widget.dataset.boundaryUrl;
-    if (!d3Url || !topojsonUrl || !boundaryUrl) return;
+    const chinaBoundaryUrl = widget.dataset.chinaBoundaryUrl;
+    if (!d3Url || !topojsonUrl || !boundaryUrl || !chinaBoundaryUrl) return;
 
     try {
         await Promise.all([loadScript(d3Url), loadScript(topojsonUrl)]);
@@ -154,8 +155,12 @@ async function initFootprintWidget(widget: HTMLElement) {
     if (!d3 || !topojson) return;
 
     let world: any;
+    let chinaWorld: any;
     try {
-        world = await loadBoundaryData(d3, boundaryUrl);
+        [world, chinaWorld] = await Promise.all([
+            loadBoundaryData(d3, boundaryUrl),
+            loadBoundaryData(d3, chinaBoundaryUrl),
+        ]);
     } catch (error) {
         empty.hidden = false;
         empty.textContent = '国家边界加载失败';
@@ -167,9 +172,21 @@ async function initFootprintWidget(widget: HTMLElement) {
     const borders = topojson.mesh(world, world.objects.countries, (a: any, b: any) => a !== b);
     const chinaIds = new Set(['156', '158', '344', '446']);
     const visitedCountryIds = new Set<string>();
+    const chinaObject = chinaWorld.objects.default;
+    const chinaGeometry = topojson.merge(
+        chinaWorld,
+        chinaObject.geometries.filter((item: any) => item.type === 'Polygon' || item.type === 'MultiPolygon')
+    );
+    let chinaVisited = false;
 
     points.forEach((point) => {
         const coordinates = [Number(point.lng), Number(point.lat)];
+        if (d3.geoContains(chinaGeometry, coordinates)) {
+            chinaVisited = true;
+            chinaIds.forEach((id) => visitedCountryIds.add(id));
+            return;
+        }
+
         const country = countries.features.find((feature: any) => d3.geoContains(feature, coordinates));
         if (!country) return;
 
@@ -181,11 +198,6 @@ async function initFootprintWidget(widget: HTMLElement) {
 
         visitedCountryIds.add(countryId);
     });
-
-    const chinaGeometry = topojson.merge(
-        world,
-        world.objects.countries.geometries.filter((item: any) => chinaIds.has(String(item.id)))
-    );
 
     const selection = d3.select(svg);
     selection.selectAll('*').remove();
@@ -214,8 +226,13 @@ async function initFootprintWidget(widget: HTMLElement) {
                 ? 'footprint-globe__country footprint-globe__country--visited'
                 : 'footprint-globe__country';
         });
-    const china = selection.append('path').attr('class', 'footprint-globe__china').datum(chinaGeometry);
     const border = selection.append('path').attr('class', 'footprint-globe__borders').datum(borders);
+    const china = selection
+        .append('path')
+        .attr('class', chinaVisited
+            ? 'footprint-globe__china footprint-globe__china--visited'
+            : 'footprint-globe__china')
+        .datum(chinaGeometry);
     const markerLayer = selection.append('g').attr('class', 'footprint-globe__markers');
 
     points.forEach((point) => {

@@ -20,8 +20,23 @@
               "icon": "lucide-file",
               "title": "index"
             }
+          },
+          {
+            "id": "7a029d73e874f4b1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "footprint/理想城市的模样/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -170,30 +185,32 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "9d90598dbd797157",
+  "active": "7a029d73e874f4b1",
   "lastOpenFiles": [
-    "footprint/暹粒/17D8E10B-BF9D-46F7-B282-4E54BB47BA07_1_105_c.jpeg",
-    "footprint/暹粒/3EC47494-8276-49F2-95FB-0881093089E5_1_105_c.jpeg",
-    "footprint/暹粒/B8C9A226-F9EE-4995-852B-40AD2583EB40_1_105_c.jpeg",
-    "footprint/暹粒/833E1754-9DF9-4697-8E9E-450434EC5D73_1_105_c.jpeg",
-    "footprint/暹粒/474DFBB3-CE49-49C5-9A3D-8D04E7501D25_1_105_c.jpeg",
-    "footprint/暹粒/49004479-9789-4A03-A93A-E4B88885C031_1_105_c.jpeg",
-    "footprint/暹粒/93EAAD8F-3E8C-4454-BF8B-B0A06A5C13D4_1_105_c.jpeg",
-    "footprint/暹粒/2B7AE503-B995-4506-9A72-82AD116E75E2_1_105_c.jpeg",
-    "footprint/暹粒/CC746978-184D-4CC1-B8EF-1544CEE0E097_1_105_c.jpeg",
-    "footprint/暹粒/暹粒-20260628140822.png",
-    "footprint/暹粒/IMG_0828.mp4",
-    "footprint/暹粒/IMG_0828.mov",
-    "footprint/暹粒/578C0656-DAE6-4CAF-ADA8-A6A460C00BDA.heic",
-    "footprint/暹粒/IMG_6701.mp4",
-    "footprint/暹粒/IMG_6701.mov",
-    "footprint/暹粒/IMG_6701.MOV",
-    "footprint/暹粒/IMG_0561.mp4",
-    "footprint/暹粒/IMG_0561.MOV",
-    "footprint/暹粒/IMG_0819.mp4",
-    "footprint/暹粒/IMG_0819.MOV",
-    "footprint/暹粒/33EB458A-1546-4D0A-B251-5F9349A28510_1_105_c.jpeg",
+    "footprint/理想城市的模样/C31EA9B6-2377-4687-AF7F-9AD4259F8C6E_1_105_c.jpeg",
+    "footprint/理想城市的模样/B322319D-5801-47EB-82C7-4D419387B262_1_105_c.jpeg",
+    "footprint/理想城市的模样/11DF4355-56BB-4214-9E83-F2F07355840B_1_105_c.jpeg",
+    "footprint/理想城市的模样/639B60EB-B513-4BBB-BC0F-734203FC8FD0_1_105_c.jpeg",
+    "footprint/理想城市的模样/D2D18142-B621-413B-9D00-0837E5310B38_1_105_c.jpeg",
+    "footprint/理想城市的模样/68E97A47-EAA8-4FC4-AAAD-4153A1EB95E6_1_105_c.jpeg",
+    "footprint/理想城市的模样/IMG_0316.mp4",
+    "footprint/理想城市的模样/IMG_0316.mov",
+    "footprint/理想城市的模样/IMG_0314.mp4",
+    "footprint/理想城市的模样/IMG_0314.mov",
+    "footprint/理想城市的模样/IMG_0310.mp4",
+    "footprint/理想城市的模样/IMG_0310.mov",
+    "footprint/理想城市的模样/82A388FD-E0A0-4AB3-891C-C2D079C8A41F_1_105_c.jpeg",
+    "footprint/理想城市的模样/DCD50DE1-A45B-4F77-AD31-3941A122A5A5_1_102_o.jpeg",
+    "footprint/理想城市的模样/40A24F52-37B6-4E43-B0BB-2AB43047BAAB_1_105_c.jpeg",
+    "footprint/理想城市的模样/38F237A9-4475-4BCF-BF27-0CCE5B4F704C_1_102_o.jpeg",
+    "footprint/理想城市的模样/6273E993-B648-454E-AF9E-953B32A30A0E_1_102_o.jpeg",
+    "footprint/理想城市的模样/42ECF8ED-6E04-4FF8-97F0-2ADED929CF35.heic",
+    "footprint/理想城市的模样/4D38AE56-088E-4EEC-924B-AAA03AB3D143.heic",
+    "footprint/理想城市的模样/sd1777684046_2.mp4",
+    "footprint/理想城市的模样/sd1777684046_2.mov",
     "footprint/暹粒/index.md",
+    "footprint/理想城市的模样/index.md",
+    "links/FloatDraft/index.md",
     "post/一点关于AI的感悟/index.md",
     "_templates/footprint.md",
     "support/快存相机.md",
