@@ -1,0 +1,28 @@
+{{ $image := partialCached "helper/image" (dict "Context" . "Type" "articleList") .RelPermalink "articleList" }}
+{{ $isFootprint := eq .Type "footprint" }}
+<article class="{{ if $image.exists }}has-image {{ end }}{{ if $isFootprint }}footprint-card{{ end }}">
+    {{ partial "article/components/header" . }}
+
+    {{ if $isFootprint }}
+        {{- $location := .Params.location | default dict -}}
+        {{- $place := .Params.location_name | default $location.name | default .Title -}}
+        {{- $lat := .Params.location_lat | default $location.lat -}}
+        {{- $lng := .Params.location_lng | default $location.lng -}}
+        <a class="footprint-card__location" href="{{ .RelPermalink }}" aria-label="查看{{ $place }}游记">
+            <span class="footprint-card__icon" aria-hidden="true">
+                {{ partial "helper/icon" "footprint" }}
+            </span>
+            <span class="footprint-card__place">{{ $place }}</span>
+            <span class="footprint-card__coordinates">
+                <span>
+                    <small>LAT</small>
+                    <strong>{{ $lat }}</strong>
+                </span>
+                <span>
+                    <small>LNG</small>
+                    <strong>{{ $lng }}</strong>
+                </span>
+            </span>
+        </a>
+    {{ end }}
+</article>

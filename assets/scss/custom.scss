@@ -1,0 +1,340 @@
+.widget.footprint {
+    gap: 12px;
+
+    .footprint-globe {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        min-height: 220px;
+        overflow: hidden;
+        border-radius: var(--card-border-radius);
+        background:
+            radial-gradient(circle at 50% 50%, rgba(78, 154, 198, 0.18), transparent 58%),
+            linear-gradient(145deg, rgba(51, 127, 177, 0.18), rgba(29, 89, 114, 0.06));
+        box-shadow: var(--shadow-l1);
+        cursor: grab;
+        touch-action: none;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 54%, rgba(21, 50, 66, 0.16) 100%);
+            pointer-events: none;
+        }
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    .footprint-globe__canvas {
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .footprint-globe__ocean {
+        fill: rgba(78, 154, 198, 0.22);
+        stroke: rgba(85, 151, 185, 0.46);
+        stroke-width: 1.4;
+    }
+
+    .footprint-globe__grid {
+        fill: none;
+        stroke: rgba(120, 144, 156, 0.22);
+        stroke-width: 0.6;
+    }
+
+    .footprint-globe__country {
+        fill: var(--card-background);
+        stroke: none;
+    }
+
+    .footprint-globe__country--visited {
+        fill: rgba(224, 85, 72, 0.62);
+    }
+
+    .footprint-globe__china {
+        fill: none;
+        stroke: rgba(93, 105, 114, 0.78);
+        stroke-width: 0.95;
+        pointer-events: none;
+    }
+
+    .footprint-globe__borders {
+        fill: none;
+        stroke: rgba(94, 111, 122, 0.42);
+        stroke-width: 0.55;
+    }
+
+    .footprint-globe__marker {
+        fill: #e05548;
+        stroke: #fff;
+        stroke-width: 1.5;
+        paint-order: stroke;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+        transition: r 0.18s ease, fill 0.18s ease;
+
+        &:hover,
+        &:focus {
+            fill: #f0a202;
+            r: 5;
+        }
+    }
+
+    .footprint-globe__controls {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: auto 30px 30px auto;
+        align-items: center;
+        gap: 4px;
+        padding: 5px;
+        border-radius: 6px;
+        background: color-mix(in srgb, var(--card-background) 92%, transparent);
+        box-shadow: var(--shadow-l1);
+        cursor: default;
+        user-select: none;
+    }
+
+    .footprint-globe__zoom {
+        min-width: 42px;
+        padding: 0 5px;
+        color: var(--card-text-color-secondary);
+        font-size: 1.15rem;
+        font-variant-numeric: tabular-nums;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    .footprint-globe__control {
+        width: 30px;
+        height: 30px;
+        border: 0;
+        border-radius: 5px;
+        background: transparent;
+        color: var(--card-text-color-main);
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 30px;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+            background: var(--card-separator-color);
+            outline: none;
+        }
+    }
+
+    .footprint-globe__control--reset {
+        min-width: 30px;
+        padding: 0;
+
+        svg {
+            width: 17px;
+            height: 17px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            vertical-align: -3px;
+        }
+    }
+
+    .footprint-globe__empty {
+        position: absolute;
+        inset: auto 18px 58px;
+        padding: 10px 12px;
+        border-radius: 6px;
+        background: var(--card-background);
+        color: var(--card-text-color-secondary);
+        box-shadow: var(--shadow-l1);
+        font-size: 1.3rem;
+        line-height: 1.45;
+        text-align: center;
+    }
+
+    .footprint-globe__tip {
+        position: absolute;
+        z-index: 3;
+        max-width: calc(100% - 24px);
+        width: max-content;
+        padding: 8px 10px;
+        border-radius: 6px;
+        background: var(--card-background);
+        color: var(--card-text-color-main);
+        box-shadow: var(--shadow-l2);
+        font-size: 1.25rem;
+        line-height: 1.4;
+        pointer-events: none;
+
+        strong,
+        span {
+            display: block;
+            overflow-wrap: anywhere;
+        }
+
+        span {
+            color: var(--card-text-color-secondary);
+        }
+    }
+}
+
+.article-list article.footprint-card {
+    @include respond(md) {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 180px;
+
+        .article-header {
+            min-width: 0;
+        }
+    }
+}
+
+.footprint-card__location {
+    position: relative;
+    display: flex;
+    min-height: 132px;
+    padding: 22px var(--card-padding);
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    overflow: hidden;
+    border-top: 1px solid var(--card-separator-color);
+    background:
+        linear-gradient(145deg, rgba(224, 85, 72, 0.16), rgba(78, 154, 198, 0.12)),
+        var(--card-background);
+    color: var(--card-text-color-main);
+
+    @include respond(md) {
+        min-height: 100%;
+        padding: 22px;
+        border-top: 0;
+        border-left: 1px solid var(--card-separator-color);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        width: 82px;
+        height: 82px;
+        right: -28px;
+        top: -28px;
+        border: 1px solid rgba(224, 85, 72, 0.2);
+        border-radius: 50%;
+        box-shadow: 0 0 0 14px rgba(78, 154, 198, 0.06);
+        pointer-events: none;
+    }
+
+    &:hover {
+        color: var(--card-text-color-main);
+
+        .footprint-card__icon {
+            color: #e05548;
+            transform: translateY(-2px);
+        }
+    }
+}
+
+.footprint-card__icon {
+    width: 26px;
+    height: 26px;
+    color: var(--card-text-color-secondary);
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        stroke-width: 1.7;
+    }
+}
+
+.footprint-card__place {
+    overflow-wrap: anywhere;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.footprint-card__coordinates {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    font-variant-numeric: tabular-nums;
+
+    span {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    small {
+        color: var(--card-text-color-tertiary);
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    strong {
+        overflow-wrap: anywhere;
+        color: var(--card-text-color-secondary);
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 1.25;
+    }
+}
+
+.article-content .article-video {
+    video {
+        display: block;
+        width: 100%;
+        max-height: 75vh;
+        background: #101214;
+        object-fit: contain;
+    }
+
+    figcaption {
+        padding: 10px var(--card-padding) 0;
+        line-height: 1.5;
+    }
+}
+
+// Give long-form posts priority over utility sidebars on laptop-sized screens.
+.article-page {
+    .main-container.extended {
+        @include respond(md) {
+            max-width: 1180px;
+            column-gap: 32px;
+            --left-sidebar-max-width: 180px;
+        }
+
+        @include respond(lg) {
+            max-width: 1440px;
+            --left-sidebar-max-width: 180px;
+        }
+
+        @include respond(2xl) {
+            max-width: 1660px;
+            --left-sidebar-max-width: 190px;
+            --right-sidebar-max-width: 270px;
+        }
+    }
+
+    .right-sidebar {
+        @include respond(lg) {
+            display: none;
+        }
+
+        @include respond(2xl) {
+            display: flex;
+        }
+    }
+}

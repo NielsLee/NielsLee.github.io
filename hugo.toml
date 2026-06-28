@@ -6,6 +6,49 @@ enableEmoji = 'true'
 hasCJKLanguage = 'true'
 ignoreFiles = ['/_templates/', '/\\.obsidian/', '^Pasted image.*']
 
+[params]
+  mainSections = ['post', 'footprint']
+
+  [params.footprint]
+    enabled = true
+    title = 'FOOTPRINT'
+    boundaryData = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
+    d3 = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js'
+    topojson = 'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js'
+
+  [params.widgets]
+    [[params.widgets.homepage]]
+      type = 'tag-cloud'
+      [params.widgets.homepage.params]
+        limit = 10
+
+    [[params.widgets.homepage]]
+      type = 'categories'
+      [params.widgets.homepage.params]
+        limit = 10
+
+    [[params.widgets.homepage]]
+      type = 'archives'
+
+    [[params.widgets.homepage]]
+      type = 'footprint'
+
+    [[params.widgets.page]]
+      type = 'toc'
+
+    [[params.widgets.page]]
+      type = 'tag-cloud'
+      [params.widgets.page.params]
+        limit = 10
+
+    [[params.widgets.page]]
+      type = 'categories'
+      [params.widgets.page.params]
+        limit = 10
+
+    [[params.widgets.page]]
+      type = 'archives'
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

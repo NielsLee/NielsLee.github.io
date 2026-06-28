@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20.972 11.291a9 9 0 1 0 -8.322 9.686"/>
+  <path d="M3.6 9h16.8"/>
+  <path d="M3.6 15h8.9"/>
+  <path d="M11.5 3a17 17 0 0 0 0 18"/>
+  <path d="M12.5 3c1.55 2.7 2.42 5.8 2.58 9.02"/>
+  <path d="M19 22s3 -2.85 3 -5a3 3 0 0 0 -6 0c0 2.15 3 5 3 5z"/>
+  <path d="M19 17v.01"/>
+</svg>

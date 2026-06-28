@@ -1,1 +1,1 @@
-{{< video src="demo.mp4" poster="cover.jpg" >}}
+{{< video src="demo.mp4" poster="cover.jpg" caption="" >}}

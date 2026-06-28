@@ -1,0 +1,9 @@
+{
+  "id": "blog-video-embed",
+  "name": "Blog Video Embed",
+  "version": "1.0.0",
+  "minAppVersion": "1.4.0",
+  "description": "Save dropped videos beside the current article and insert a Hugo video shortcode.",
+  "author": "NielsLee",
+  "isDesktopOnly": true
+}

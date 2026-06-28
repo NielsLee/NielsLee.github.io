@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "post/一点关于AI的感悟/index.md",
+                "file": "footprint/暹粒/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -166,26 +166,39 @@
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "templater-obsidian:Templater": false
     }
   },
   "active": "9d90598dbd797157",
   "lastOpenFiles": [
-    "post/一点关于AI的感悟/现阶段AI对我的影响-20260613163115.png",
-    "post/一点关于AI的感悟/一点关于AI的感悟-20260613175810.png",
-    "post/一点关于AI的感悟/现阶段AI对我的影响-20260613162244.png",
-    "post/一点关于AI的感悟/现阶段AI对我的影响-20260613163053.png",
-    "post/一点关于AI的感悟/现阶段AI对我的影响-20260613162101.png",
-    "post/一点关于AI的感悟/一点关于AI的感悟-20260613165505.png",
+    "footprint/暹粒/17D8E10B-BF9D-46F7-B282-4E54BB47BA07_1_105_c.jpeg",
+    "footprint/暹粒/3EC47494-8276-49F2-95FB-0881093089E5_1_105_c.jpeg",
+    "footprint/暹粒/B8C9A226-F9EE-4995-852B-40AD2583EB40_1_105_c.jpeg",
+    "footprint/暹粒/833E1754-9DF9-4697-8E9E-450434EC5D73_1_105_c.jpeg",
+    "footprint/暹粒/474DFBB3-CE49-49C5-9A3D-8D04E7501D25_1_105_c.jpeg",
+    "footprint/暹粒/49004479-9789-4A03-A93A-E4B88885C031_1_105_c.jpeg",
+    "footprint/暹粒/93EAAD8F-3E8C-4454-BF8B-B0A06A5C13D4_1_105_c.jpeg",
+    "footprint/暹粒/2B7AE503-B995-4506-9A72-82AD116E75E2_1_105_c.jpeg",
+    "footprint/暹粒/CC746978-184D-4CC1-B8EF-1544CEE0E097_1_105_c.jpeg",
+    "footprint/暹粒/暹粒-20260628140822.png",
+    "footprint/暹粒/IMG_0828.mp4",
+    "footprint/暹粒/IMG_0828.mov",
+    "footprint/暹粒/578C0656-DAE6-4CAF-ADA8-A6A460C00BDA.heic",
+    "footprint/暹粒/IMG_6701.mp4",
+    "footprint/暹粒/IMG_6701.mov",
+    "footprint/暹粒/IMG_6701.MOV",
+    "footprint/暹粒/IMG_0561.mp4",
+    "footprint/暹粒/IMG_0561.MOV",
+    "footprint/暹粒/IMG_0819.mp4",
+    "footprint/暹粒/IMG_0819.MOV",
+    "footprint/暹粒/33EB458A-1546-4D0A-B251-5F9349A28510_1_105_c.jpeg",
+    "footprint/暹粒/index.md",
     "post/一点关于AI的感悟/index.md",
-    "post/一点关于AI的感悟",
+    "_templates/footprint.md",
+    "support/快存相机.md",
+    "privacy/快存相机.md",
     "post/有一次测试/index.md",
-    "post/有一次测试/有一次测试-20260607171811.png",
-    "post/有一次测试/Pasted image 20260607171649.png",
-    "post/有一次测试/Pasted image 20260607171545.png",
-    "post/有一次测试/Pasted image 20260607171051.png",
-    "post/有一次测试",
-    "post/使用Obsidian工作流创建新文章/index.md",
-    "post/使用Obsidian工作流创建新文章"
+    "post/使用Obsidian工作流创建新文章/index.md"
   ]
 }

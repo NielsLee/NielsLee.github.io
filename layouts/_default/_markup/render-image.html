@@ -7,6 +7,9 @@
 {{- $image := .Page.Resources.GetMatch $destination -}}
 {{- $Permalink := $destination | relURL | safeURL -}}
 {{- $alt := .PlainText | safeHTML -}}
+{{- if findRE `^\s*\d+\s*$` .PlainText -}}
+	{{- $alt = "" -}}
+{{- end -}}
 {{- $Width := 0 -}}
 {{- $Height := 0 -}}
 {{- $Srcset := "" -}}
@@ -38,6 +41,7 @@
 	loading="lazy"
 	{{ with $alt }}
 		alt="{{ . }}"
+		data-caption="{{ . }}"
 	{{ end }}
 	{{ if $galleryImage }}
 		class="gallery-image" 

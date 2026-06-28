@@ -1,0 +1,52 @@
+{{- $context := .Context -}}
+{{- $settings := $context.Site.Params.footprint -}}
+{{- if ne $settings.enabled false -}}
+    {{- $points := slice -}}
+    {{- range where $context.Site.RegularPages "Type" "footprint" -}}
+        {{- $location := default dict .Params.location -}}
+        {{- $lat := default $location.lat .Params.location_lat -}}
+        {{- $lng := default $location.lng .Params.location_lng -}}
+        {{- $place := default (default .Title $location.name) .Params.location_name -}}
+        {{- if and $lat $lng -}}
+            {{- $points = $points | append (dict
+                "title" .Title
+                "url" .RelPermalink
+                "place" $place
+                "lat" $lat
+                "lng" $lng
+                "date" (.Date.Format "2006-01-02")
+            ) -}}
+        {{- end -}}
+    {{- end -}}
+
+    <section
+        class="widget footprint"
+        data-boundary-url="{{ default "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json" $settings.boundaryData }}"
+        data-d3-url="{{ default "https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" $settings.d3 }}"
+        data-topojson-url="{{ default "https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js" $settings.topojson }}"
+    >
+        <div class="widget-icon">
+            {{ partial "helper/icon" "footprint" }}
+        </div>
+        <h2 class="widget-title section-title">{{ default "FOOTPRINT" $settings.title }}</h2>
+
+        <div class="footprint-globe" aria-label="游记地球视图">
+            <svg class="footprint-globe__canvas" role="img"></svg>
+            <div class="footprint-globe__controls" aria-label="地图缩放控制">
+                <span class="footprint-globe__zoom">100%</span>
+                <button class="footprint-globe__control" type="button" data-action="zoom-in" aria-label="放大地图">+</button>
+                <button class="footprint-globe__control" type="button" data-action="zoom-out" aria-label="缩小地图">-</button>
+                <button class="footprint-globe__control footprint-globe__control--reset" type="button" data-action="reset" aria-label="复位地图">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 12a8 8 0 1 0 2.34 -5.66"/>
+                        <path d="M4 4v5h5"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="footprint-globe__empty"{{ if gt (len $points) 0 }} hidden{{ end }}>还没有带地理位置的游记</div>
+            <div class="footprint-globe__tip" hidden></div>
+        </div>
+
+        <script class="footprint-points" type="application/json">{{ if gt (len $points) 0 }}{{ $points | jsonify | safeJS }}{{ else }}[]{{ end }}</script>
+    </section>
+{{- end -}}

@@ -71,6 +71,42 @@
         "focus": true,
         "mode": "default"
       }
+    },
+    {
+      "id": "2d7f4f60-8c29-4fb3-9d9c-0e6f7b7f6a10",
+      "name": "新建游记",
+      "type": "Template",
+      "command": true,
+      "templatePath": "_templates/footprint.md",
+      "fileNameFormat": {
+        "enabled": true,
+        "format": "index"
+      },
+      "folder": {
+        "enabled": true,
+        "folders": [
+          "footprint/{{VALUE}}"
+        ],
+        "chooseWhenCreatingNote": false,
+        "createInSameFolderAsActiveFile": false
+      },
+      "appendLink": false,
+      "openFileInNewTab": {
+        "enabled": false,
+        "direction": "vertical",
+        "focus": true
+      },
+      "openFile": true,
+      "openFileInMode": "default",
+      "fileExistsBehavior": {
+        "kind": "prompt"
+      },
+      "fileOpening": {
+        "location": "tab",
+        "direction": "vertical",
+        "focus": true,
+        "mode": "default"
+      }
     }
   ],
   "inputPrompt": "single-line",
