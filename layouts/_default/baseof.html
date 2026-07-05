@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="{{ default `ltr` .Language.LanguageDirection }}">
+    <head>
+        {{- partial "head/head.html" . -}}
+        {{- block "head" . -}}{{ end }}
+    </head>
+    <body class="{{ block `body-class` . }}{{ end }}">
+        {{- partial "head/colorScheme" . -}}
+
+        {{/* The container is wider when there's any activated widget */}}
+        {{- $hasWidget := false -}}
+        {{- range .Site.Params.widgets -}}
+            {{- if gt (len .) 0 -}}
+                {{- $hasWidget = true -}}
+            {{- end -}}
+        {{- end -}}
+        <div class="container main-container flex on-phone--column {{ if $hasWidget }}extended{{ else }}compact{{ end }}">
+            {{- block "left-sidebar" . -}}
+                {{ partial "sidebar/left.html" . }}
+            {{- end -}}
+            {{- block "right-sidebar" . -}}{{ end }}
+            <main class="main full-width">
+                {{- block "main" . }}{{- end }}
+            </main>
+        </div>
+        <a class="support-me-floating-button" href="https://ko-fi.com/nielslee" target="_blank" rel="noopener noreferrer" aria-label="Support Me" draggable="false">
+            <span>Support Me</span>
+        </a>
+<style>
+    .support-me-floating-button {
+        position: fixed !important;
+        right: calc(20px + env(safe-area-inset-right)) !important;
+        bottom: calc(40px + env(safe-area-inset-bottom)) !important;
+        z-index: 9999;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 118px;
+        max-width: calc(100vw - 24px);
+        min-height: 48px;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: #00b9fe;
+        box-shadow: 0 10px 24px rgba(0, 185, 254, 0.32);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1;
+        text-decoration: none;
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .support-me-floating-button:hover,
+    .support-me-floating-button:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .support-me-floating-button.is-dragging {
+        cursor: grabbing;
+    }
+
+    @media (max-width: 680px) {
+        .support-me-floating-button {
+            min-width: 104px;
+            min-height: 44px;
+            padding: 0 14px;
+            font-size: 14px;
+        }
+    }
+</style>
+<script>
+  (() => {
+    const button = document.querySelector('.support-me-floating-button');
+    if (!button) return;
+
+    let dragState = null;
+    let lastViewportWidth = window.innerWidth;
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), Math.max(min, max));
+    const viewport = () => {
+      const visual = window.visualViewport;
+      return {
+        left: visual?.offsetLeft || 0,
+        top: visual?.offsetTop || 0,
+        width: visual?.width || window.innerWidth,
+        height: visual?.height || window.innerHeight
+      };
+    };
+
+    const placeButton = (left, top) => {
+      const view = viewport();
+      const rect = button.getBoundingClientRect();
+      const nextLeft = clamp(left, view.left + 12, view.left + view.width - rect.width - 12);
+      const nextTop = clamp(top, view.top + 12, view.top + view.height - rect.height - 12);
+
+      button.style.setProperty('left', `${nextLeft}px`, 'important');
+      button.style.setProperty('top', `${nextTop}px`, 'important');
+      button.style.setProperty('right', 'auto', 'important');
+      button.style.setProperty('bottom', 'auto', 'important');
+      button.style.setProperty('position', 'fixed', 'important');
+      return { left: nextLeft, top: nextTop };
+    };
+
+    const keepButtonVisible = () => {
+      const view = viewport();
+      const rect = button.getBoundingClientRect();
+      placeButton(
+        clamp(rect.left, view.left + 12, view.left + view.width - rect.width - 12),
+        clamp(rect.top, view.top + 12, view.top + view.height - rect.height - 12)
+      );
+    };
+
+    button.addEventListener('pointerdown', (event) => {
+      if (event.button !== 0 && event.pointerType !== 'touch') return;
+
+      const rect = button.getBoundingClientRect();
+      dragState = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        left: rect.left,
+        top: rect.top,
+        moved: false
+      };
+      button.classList.add('is-dragging');
+      button.setPointerCapture?.(event.pointerId);
+    });
+
+    button.addEventListener('pointermove', (event) => {
+      if (!dragState || dragState.pointerId !== event.pointerId) return;
+
+      const dx = event.clientX - dragState.startX;
+      const dy = event.clientY - dragState.startY;
+      if (Math.abs(dx) + Math.abs(dy) > 4) dragState.moved = true;
+      if (!dragState.moved) return;
+
+      event.preventDefault();
+      placeButton(dragState.left + dx, dragState.top + dy);
+    }, { passive: false });
+
+    const endDrag = (event) => {
+      if (!dragState || dragState.pointerId !== event.pointerId) return;
+
+      const wasMoved = dragState.moved;
+      dragState = null;
+      button.classList.remove('is-dragging');
+      button.releasePointerCapture?.(event.pointerId);
+
+      if (wasMoved) {
+        button.dataset.suppressSupportClick = 'true';
+        window.setTimeout(() => {
+          delete button.dataset.suppressSupportClick;
+        }, 0);
+      }
+    };
+
+    button.addEventListener('pointerup', endDrag);
+    button.addEventListener('pointercancel', endDrag);
+    button.addEventListener('click', (event) => {
+      if (button.dataset.suppressSupportClick === 'true') {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, true);
+
+    window.addEventListener('resize', () => {
+      const nextViewportWidth = window.innerWidth;
+      if (Math.abs(nextViewportWidth - lastViewportWidth) < 1) return;
+
+      lastViewportWidth = nextViewportWidth;
+      keepButtonVisible();
+    });
+  })();
+</script>
+        {{ partial "footer/include.html" . }}
+    </body>
+</html>

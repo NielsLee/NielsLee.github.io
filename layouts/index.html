@@ -1,0 +1,64 @@
+{{ define "main" }}
+    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+    {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
+    {{ $filtered := ($pages | intersect $notHidden) }}
+    {{ $pag := .Paginate ($filtered) }}
+
+    {{ if eq $pag.PageNumber 1 }}
+        <section class="home-overview" aria-labelledby="home-overview-title">
+            <header class="home-overview__header">
+                <div>
+                    <h1 id="home-overview-title">文章总览</h1>
+                    <p>最近更新的 {{ math.Min 12 (len $filtered) }} 篇，共 {{ len $filtered }} 篇文章</p>
+                </div>
+                <a href="{{ "archieves/" | relURL }}">查看全部</a>
+            </header>
+
+            <ol class="home-overview__list">
+                {{ range first 12 $filtered.ByDate.Reverse }}
+                    {{- $page := . -}}
+                    <li>
+                        <a class="home-overview__item" href="{{ .RelPermalink }}">
+                            <time datetime="{{ .Date.Format "2006-01-02" }}">
+                                <strong>{{ .Date.Format "01.02" }}</strong>
+                                <span>{{ .Date.Format "2006" }}</span>
+                            </time>
+                            <span class="home-overview__details">
+                                <strong>{{ .Title }}</strong>
+                                <span>
+                                    {{ with .Params.categories }}
+                                        {{ index . 0 }}
+                                    {{ else }}
+                                        {{ if eq $page.Type "footprint" }}
+                                            游记
+                                        {{ else }}
+                                            随笔
+                                        {{ end }}
+                                    {{ end }}
+                                </span>
+                            </span>
+                        </a>
+                    </li>
+                {{ end }}
+            </ol>
+        </section>
+
+        <header class="home-feed-heading">
+            <h2>最新文章</h2>
+            <span>按发布时间排序</span>
+        </header>
+    {{ end }}
+
+    <section class="article-list">
+        {{ range $pag.Pages }}
+            {{ partial "article-list/default" . }}
+        {{ end }}
+    </section>
+
+    {{- partial "pagination.html" . -}}
+    {{- partial "footer/footer" . -}}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}
