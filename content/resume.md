@@ -63,10 +63,10 @@ readingTime: false
             <p class="resume-label">内容:</p>
             <ol>
               <li>负责Android客户端性能自动化脚本开发，及线下自动化平台的搭建</li>
-              <li>负责线上APM平台开发</li>
+              <li>负责线上APM平台开发, 包括Crash, 卡顿, ANR等异常数据的上报及度量;异常堆栈还原及AI修复</li>
               <li>参与AI Codingg工程化建设，负责质量维度的AICR落地及度量</li>
               <li>负责客户端及后台代码覆盖率插件维护，覆盖率门禁平台开发，质量门禁落地</li>
-              <li>负责鸿蒙代码混淆符号表还原服务开发及异常堆栈还原服务开发</li>
+              <li>负责效能度量平台开发及维护, 囊括版本维度,人效维度,模块维度的效能度量数据</li>
             </ol>
           </div>
           <div class="resume-block">
@@ -87,12 +87,9 @@ readingTime: false
           </div>
           <p>负责移动开发框架的方案设计、组件开发，具体内容包括：</p>
           <ul>
-            <li>负责站内信组件的安卓端侧sdk方案设计、开发工作</li>
-            <li>负责远程配置服务安卓端侧sdk方案设计与开发工作</li>
-            <li>负责远程配置服务的服务侧运维工作，包括构建、部署</li>
+            <li>负责站内信组件及远程配置组件的安卓端侧sdk方案设计、开发工作</li>
             <li>负责移动开发框架中的H5容器、通信底座方案设计与开发工作</li>
             <li>负责用户体验调研平台端侧SDK的方案设计、开发工作</li>
-            <li>参与移动开发框架CICD工程能力建设，以及云服务业务应用的包体积优化技术专项</li>
           </ul>
         </article>
 
@@ -111,7 +108,6 @@ readingTime: false
           <div class="resume-block">
             <p class="resume-label">业绩:</p>
             <p>关键项目节点无延期，无版本重出、打回；无严重市场问题，舆情反馈；升级项目交付人力投入得到优化</p>
-            <p>保质保量完成应用层需求的交付工作</p>
           </div>
         </article>
       </div>
@@ -120,6 +116,32 @@ readingTime: false
     <section class="resume-section" data-resume-section>
       <h2 class="resume-section-title">项目经历</h2>
       <div class="resume-section-body">
+
+        <article class="resume-entry" data-resume-entry>
+          <div class="resume-entry-head">
+            <div class="resume-entry-name">
+              <h3 class="resume-heading">研发效能度量平台</h3>
+              <span class="resume-role">Owner</span>
+            </div>
+            <span class="resume-date">2026.06-至今</span>
+          </div>
+          <div class="resume-block">
+            <p class="resume-label">内容:</p>
+            <ul class="resume-plain-list">
+              <li>项目介绍：用于度量集团主要产品的研发效能数据, 包括版本周期, 人力投入, 需求各阶段耗时等关键指标</li>
+              <li>担任角色：Owner</li>
+            </ul>
+          </div>
+          <div class="resume-block">
+            <p class="resume-label">内容:</p>
+            <ul class="resume-plain-list">
+              <li>通过Webhook采集Devops平台的需求, 缺陷数据, 落表Mysql; 通过定时任务+kafka异步计算确保数据可靠性及可重放</li>
+              <li>使用Redis缓存+kafka+StarRocks数据库缓存, 确保元数据的改动能第一时间同步到计算结果缓存中, 提高有效指标的查询速度</li>
+              <li>支持多维度度量数据展示, 如版本交付周期, 版本各阶段耗时, 投产人力分布, 需求容量; 支持自定义字段配置及跨周期/版本对比</li>
+            </ul>
+          </div>
+        </article>
+
         <article class="resume-entry" data-resume-entry data-resume-detail-id="aicoding-engineering">
           <div class="resume-entry-head">
             <div class="resume-entry-name">
@@ -188,32 +210,6 @@ readingTime: false
             <ul class="resume-plain-list">
               <li>性能自动化任务主干分支覆盖率95%+，需求分支80%+；涵盖应用启动和Top页面多个场景。</li>
               <li>负责期间在版本前置阶段累计发现有效性能问题50+</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="resume-entry" data-resume-entry>
-          <div class="resume-entry-head">
-            <div class="resume-entry-name">
-              <h3 class="resume-heading">用户体验调研平台端侧SDK开发</h3>
-              <span class="resume-role">端侧SDK负责人</span>
-            </div>
-            <span class="resume-date">2024.07-2024.12</span>
-          </div>
-          <div class="resume-block">
-            <p class="resume-label">内容:</p>
-            <ul class="resume-plain-list">
-              <li>项目介绍：用户体验调研平台是一个面向公司所有云服务应用的体验问卷投放平台；业务通过平台向应用APP动态投放和回收问卷</li>
-              <li>担任角色：负责端侧接入SDK的方案设计与开发，交付可供云服务应用接入的问卷SDK</li>
-            </ul>
-          </div>
-          <div class="resume-block">
-            <p class="resume-label">业绩:</p>
-            <ul class="resume-plain-list">
-              <li>参与问卷SDK的技术选型, 输出原生+H5融合的方案设计</li>
-              <li>端侧SDK自定义H5容器，注入JSAPI供H5侧与原生侧通信</li>
-              <li>端侧SDK自定义View, 嵌入H5容器, 交付动态视图供开发侧接入</li>
-              <li>深入研究混淆规则及gradle打包流程，优化APK接入SDK后的体积，减小约12MB</li>
             </ul>
           </div>
         </article>
