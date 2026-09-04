@@ -1,22 +1,36 @@
 {{- $context := .Context -}}
 {{- $settings := $context.Site.Params.footprint -}}
 {{- if ne $settings.enabled false -}}
+    {{- $home := default dict $settings.home -}}
+    {{- $homeTitle := default "现居地" $home.title -}}
+    {{- $homePlace := default "深圳" $home.place -}}
+    {{- $homeLat := default 22.5431 $home.lat -}}
+    {{- $homeLng := default 114.0579 $home.lng -}}
+    {{- $homeURL := default "/about/" $home.url | relURL -}}
+    {{- $camera := default dict $settings.camera -}}
     {{- $points := slice -}}
-    {{- range where $context.Site.RegularPages "Type" "footprint" -}}
+    {{- $pages := where $context.Site.RegularPages "Type" "in" $context.Site.Params.mainSections -}}
+    {{- $pages = where $pages "Params.hidden" "!=" true -}}
+    {{- range $pages.ByDate.Reverse -}}
         {{- $location := default dict .Params.location -}}
         {{- $lat := default $location.lat .Params.location_lat -}}
         {{- $lng := default $location.lng .Params.location_lng -}}
+        {{- $hasLocation := and $lat $lng -}}
         {{- $place := default (default .Title $location.name) .Params.location_name -}}
-        {{- if and $lat $lng -}}
-            {{- $points = $points | append (dict
-                "title" .Title
-                "url" .RelPermalink
-                "place" $place
-                "lat" $lat
-                "lng" $lng
-                "date" (.Date.Format "2006-01-02")
-            ) -}}
+        {{- if not $hasLocation -}}
+            {{- $lat = $homeLat -}}
+            {{- $lng = $homeLng -}}
+            {{- $place = $homePlace -}}
         {{- end -}}
+        {{- $points = $points | append (dict
+            "title" .Title
+            "url" .RelPermalink
+            "place" $place
+            "lat" $lat
+            "lng" $lng
+            "date" (.Date.Format "2006-01-02")
+            "isFallbackLocation" (not $hasLocation)
+        ) -}}
     {{- end -}}
 
     <section
@@ -24,30 +38,49 @@
         data-boundary-url="{{ default "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json" $settings.boundaryData }}"
         data-china-boundary-url="{{ default "/data/china-boundary.topo.json" $settings.chinaBoundaryData | relURL }}"
         data-d3-url="{{ default "https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" $settings.d3 }}"
+        data-projection-url="{{ default "https://cdn.jsdelivr.net/npm/d3-geo-projection@4.0.0/dist/d3-geo-projection.min.js" $settings.projection }}"
         data-topojson-url="{{ default "https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js" $settings.topojson }}"
+        data-starfield-engine-url="{{ default "https://cdn.jsdelivr.net/npm/@tsparticles/engine@4.3.2/tsparticles.engine.min.js" $settings.starfieldEngine }}"
+        data-starfield-bundle-url="{{ default "https://cdn.jsdelivr.net/npm/@tsparticles/basic@4.3.2/tsparticles.basic.bundle.min.js" $settings.starfieldBundle }}"
+        data-camera-anchor-latitude="{{ default 0 $camera.anchorLatitude }}"
+        data-camera-width-ratio="{{ default 0.5 $camera.widthRatio }}"
+        data-camera-distance="{{ default 18 $camera.distance }}"
+        data-camera-tilt="0"
+        data-camera-north-pole-y="{{ default 0.5 $camera.northPoleY }}"
+        data-camera-rotation-speed="{{ default 2 $camera.rotationSpeed }}"
     >
         <div class="widget-icon">
             {{ partial "helper/icon" "footprint" }}
         </div>
         <h2 class="widget-title section-title">{{ default "FOOTPRINT" $settings.title }}</h2>
 
-        <div class="footprint-globe" aria-label="游记地球视图">
-            <svg class="footprint-globe__canvas" role="img"></svg>
-            <div class="footprint-globe__controls" aria-label="地图缩放控制">
-                <span class="footprint-globe__zoom">100%</span>
-                <button class="footprint-globe__control" type="button" data-action="zoom-in" aria-label="放大地图">+</button>
-                <button class="footprint-globe__control" type="button" data-action="zoom-out" aria-label="缩小地图">-</button>
-                <button class="footprint-globe__control footprint-globe__control--reset" type="button" data-action="reset" aria-label="复位地图">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M4 12a8 8 0 1 0 2.34 -5.66"/>
-                        <path d="M4 4v5h5"/>
-                    </svg>
+        <div class="footprint-globe__slot">
+            <div class="footprint-globe" aria-label="游记地球视图">
+                <div class="footprint-globe__starfield" id="footprint-starfield" aria-hidden="true"></div>
+                <svg class="footprint-globe__canvas" role="img"></svg>
+                <button class="footprint-globe__expand" type="button" data-action="expand" aria-expanded="false" aria-label="展开 Footprint 地球">
+                    <span data-expand-icon aria-hidden="true">✨</span>
+                    <span data-expand-label></span>
                 </button>
+                <div class="footprint-globe__controls" aria-label="地图缩放控制">
+                    <span class="footprint-globe__zoom">100%</span>
+                    <button class="footprint-globe__control" type="button" data-action="zoom-in" aria-label="放大地图">+</button>
+                    <button class="footprint-globe__control" type="button" data-action="zoom-out" aria-label="缩小地图">-</button>
+                    <button class="footprint-globe__control footprint-globe__control--reset" type="button" data-action="reset" aria-label="复位地图">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 12a8 8 0 1 0 2.34 -5.66"/>
+                            <path d="M4 4v5h5"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="footprint-globe__empty"{{ if gt (len $points) 0 }} hidden{{ end }}>还没有带地理位置的游记</div>
+                <div class="footprint-globe__markers-layer" aria-label="文章地点"></div>
+                <div class="footprint-globe__tip" role="dialog" hidden></div>
+                <div class="footprint-globe__status" aria-live="polite"></div>
             </div>
-            <div class="footprint-globe__empty"{{ if gt (len $points) 0 }} hidden{{ end }}>还没有带地理位置的游记</div>
-            <div class="footprint-globe__tip" hidden></div>
         </div>
 
         <script class="footprint-points" type="application/json">{{ if gt (len $points) 0 }}{{ $points | jsonify | safeJS }}{{ else }}[]{{ end }}</script>
+        <script class="footprint-profile" type="application/json">{{ dict "title" $homeTitle "url" $homeURL "place" $homePlace "lat" $homeLat "lng" $homeLng | jsonify | safeJS }}</script>
     </section>
 {{- end -}}

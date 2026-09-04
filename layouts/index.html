@@ -1,3 +1,5 @@
+{{ define "body-class" }}home-page{{ end }}
+
 {{ define "main" }}
     {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
     {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
@@ -18,7 +20,7 @@
                 {{ range first 12 $filtered.ByDate.Reverse }}
                     {{- $page := . -}}
                     <li>
-                        <a class="home-overview__item" href="{{ .RelPermalink }}">
+                        <a class="home-overview__item" href="{{ .RelPermalink }}" data-footprint-article-url="{{ .RelPermalink }}">
                             <time datetime="{{ .Date.Format "2006-01-02" }}">
                                 <strong>{{ .Date.Format "01.02" }}</strong>
                                 <span>{{ .Date.Format "2006" }}</span>

@@ -1,6 +1,6 @@
 {{ $image := partialCached "helper/image" (dict "Context" . "Type" "articleList") .RelPermalink "articleList" }}
 {{ $isFootprint := eq .Type "footprint" }}
-<article class="{{ if $image.exists }}has-image {{ end }}{{ if $isFootprint }}footprint-card{{ end }}">
+<article class="{{ if $image.exists }}has-image {{ end }}{{ if $isFootprint }}footprint-card{{ end }}" data-footprint-article-url="{{ .RelPermalink }}">
     {{ partial "article/components/header" . }}
 
     {{ if $isFootprint }}

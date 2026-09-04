@@ -15,7 +15,25 @@ ignoreFiles = ['/_templates/', '/\\.obsidian/', '^Pasted image.*']
     boundaryData = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
     chinaBoundaryData = '/data/china-boundary.topo.json'
     d3 = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js'
+    projection = 'https://cdn.jsdelivr.net/npm/d3-geo-projection@4.0.0/dist/d3-geo-projection.min.js'
     topojson = 'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js'
+    starfieldEngine = 'https://cdn.jsdelivr.net/npm/@tsparticles/engine@4.3.2/tsparticles.engine.min.js'
+    starfieldBundle = 'https://cdn.jsdelivr.net/npm/@tsparticles/basic@4.3.2/tsparticles.basic.bundle.min.js'
+
+    [params.footprint.home]
+      title = '现居地'
+      place = '深圳'
+      lat = 22.5431
+      lng = 114.0579
+      url = '/about/'
+
+    [params.footprint.camera]
+      anchorLatitude = 0
+      widthRatio = 0.5
+      distance = 18
+      tilt = 0
+      northPoleY = 0.5
+      rotationSpeed = 2.0
 
   [params.widgets]
     [[params.widgets.homepage]]

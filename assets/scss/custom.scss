@@ -1,25 +1,51 @@
 .widget.footprint {
     gap: 12px;
 
-    .footprint-globe {
+    .footprint-globe__slot {
         position: relative;
         width: 100%;
         aspect-ratio: 1;
         min-height: 220px;
-        overflow: hidden;
         border-radius: var(--card-border-radius);
         background:
-            radial-gradient(circle at 50% 50%, rgba(78, 154, 198, 0.18), transparent 58%),
-            linear-gradient(145deg, rgba(51, 127, 177, 0.18), rgba(29, 89, 114, 0.06));
+            radial-gradient(ellipse at 72% 18%, rgba(68, 72, 148, 0.24), transparent 34%),
+            radial-gradient(ellipse at 18% 72%, rgba(18, 100, 137, 0.2), transparent 38%),
+            radial-gradient(circle at 50% 76%, rgba(25, 72, 104, 0.26), transparent 44%),
+            linear-gradient(180deg, #02040b 0%, #040817 52%, #07101f 100%);
         box-shadow: var(--shadow-l1);
+    }
+
+    .footprint-globe {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 6;
+        width: 1px;
+        height: 1px;
+        min-height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        border-radius: var(--card-border-radius);
+        background:
+            radial-gradient(ellipse at 72% 18%, rgba(68, 72, 148, 0.24), transparent 34%),
+            radial-gradient(ellipse at 18% 72%, rgba(18, 100, 137, 0.2), transparent 38%),
+            radial-gradient(circle at 50% 76%, rgba(25, 72, 104, 0.26), transparent 44%),
+            linear-gradient(180deg, #02040b 0%, #040817 52%, #07101f 100%);
+        box-shadow: var(--shadow-l1);
+        opacity: 0;
         cursor: grab;
+        pointer-events: none;
         touch-action: none;
+        contain: layout paint style;
+        backface-visibility: hidden;
+        will-change: top, left, width, height, border-radius;
 
         &::before {
             content: "";
             position: absolute;
+            z-index: 1;
             inset: 0;
-            background: radial-gradient(circle at center, transparent 54%, rgba(21, 50, 66, 0.16) 100%);
+            background: radial-gradient(circle at 50% 52%, transparent 44%, rgba(0, 0, 0, 0.28) 100%);
             pointer-events: none;
         }
 
@@ -28,37 +54,129 @@
         }
     }
 
+    &.is-layer-ready .footprint-globe {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
     .footprint-globe__canvas {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         display: block;
         width: 100%;
         height: 100%;
     }
 
+    .footprint-globe__starfield {
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.45s ease;
+
+        canvas {
+            position: absolute !important;
+            inset: 0;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+        }
+    }
+
+    .footprint-globe__starfield.is-ready {
+        opacity: 0.78;
+    }
+
+    .footprint-globe__starfield.is-layout-transitioning {
+        opacity: 0;
+        transition: none;
+    }
+
+    .footprint-globe__expand {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 7;
+        display: inline-flex;
+        width: 40px;
+        min-width: 40px;
+        height: 36px;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        border: 0;
+        border-radius: 6px;
+        background: rgba(7, 16, 31, 0.82);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+        color: #fff;
+        backdrop-filter: blur(10px);
+        font: inherit;
+        font-size: 1.2rem;
+        font-weight: 650;
+        line-height: 1;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+            background: rgba(13, 29, 50, 0.94);
+            color: #fff;
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            cursor: wait;
+            opacity: 0.7;
+        }
+
+        & > [data-expand-icon] {
+            font-size: 0;
+            font-weight: 500;
+
+            &::before {
+                content: "✨";
+                font-size: 1.5rem;
+            }
+        }
+
+        [data-expand-label] {
+            display: none;
+        }
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
     .footprint-globe__ocean {
-        fill: rgba(78, 154, 198, 0.22);
-        stroke: rgba(85, 151, 185, 0.46);
+        fill: #164b69;
+        stroke: #6ebce0;
         stroke-width: 1.4;
     }
 
     .footprint-globe__grid {
         fill: none;
-        stroke: rgba(120, 144, 156, 0.22);
+        stroke: rgba(171, 211, 229, 0.2);
         stroke-width: 0.6;
     }
 
     .footprint-globe__country {
-        fill: var(--card-background);
+        fill: #e1ebef;
         stroke: none;
     }
 
     .footprint-globe__country--visited {
-        fill: rgba(224, 85, 72, 0.62);
+        fill: #e05548;
     }
 
     .footprint-globe__china {
-        fill: var(--card-background);
+        fill: #e1ebef;
         stroke: rgba(94, 111, 122, 0.42);
         stroke-width: 0.55;
         pointer-events: none;
@@ -72,6 +190,16 @@
         fill: none;
         stroke: rgba(94, 111, 122, 0.42);
         stroke-width: 0.55;
+    }
+
+    .footprint-globe__markers--preview a {
+        cursor: pointer;
+    }
+
+    .footprint-globe__marker-hit {
+        fill: transparent;
+        stroke: none;
+        pointer-events: all;
     }
 
     .footprint-globe__marker {
@@ -103,7 +231,7 @@
         right: 10px;
         bottom: 10px;
         z-index: 2;
-        display: grid;
+        display: none;
         grid-template-columns: auto 30px 30px auto;
         align-items: center;
         gap: 4px;
@@ -176,7 +304,7 @@
 
     .footprint-globe__tip {
         position: absolute;
-        z-index: 3;
+        z-index: 6;
         max-width: calc(100% - 24px);
         width: max-content;
         padding: 8px 10px;
@@ -197,6 +325,379 @@
         span {
             color: var(--card-text-color-secondary);
         }
+    }
+
+    .footprint-globe__tip--preview-articles {
+        width: max-content;
+        max-width: 190px;
+        max-height: 150px;
+        padding: 7px 9px 8px;
+        overflow: auto;
+        pointer-events: auto;
+
+        strong {
+            font-weight: 750;
+        }
+
+        ul {
+            display: flex;
+            margin: 6px 0 0;
+            padding: 6px 0 0;
+            flex-direction: column;
+            gap: 3px;
+            border-top: 1px solid var(--card-separator-color);
+            list-style: none;
+        }
+
+        li {
+            position: relative;
+            padding-left: 11px;
+            color: var(--card-text-color-secondary);
+            font-size: 1.08rem;
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+
+            &::before {
+                content: "·";
+                position: absolute;
+                left: 0;
+                color: var(--card-text-color-main);
+            }
+
+            &.footprint-globe__tip-current-location {
+                padding-left: 0;
+
+                &::before {
+                    content: none;
+                }
+            }
+        }
+
+        a {
+            color: inherit;
+
+            &:hover,
+            &:focus-visible {
+                color: var(--accent-color);
+                outline: none;
+            }
+        }
+    }
+
+    .footprint-globe__markers-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.24s ease, visibility 0s linear 0.24s;
+
+        &.is-visible {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+
+            .footprint-location-marker,
+            .footprint-profile-marker {
+                pointer-events: auto;
+            }
+        }
+    }
+
+    .footprint-location-marker,
+    .footprint-profile-marker {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    .footprint-location-marker {
+        display: grid;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        cursor: pointer;
+        transition: transform 0.18s ease;
+
+        &:hover,
+        &:focus-visible {
+            outline: none;
+            transform: translate(-50%, -50%) scale(1.24);
+        }
+    }
+
+    .footprint-location-marker__dot {
+        width: 10px;
+        height: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.96);
+        border-radius: 50%;
+        background: #e05548;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.46), 0 0 0 3px rgba(224, 85, 72, 0.2);
+        transition: background 0.18s ease, box-shadow 0.18s ease;
+        pointer-events: none;
+    }
+
+    .footprint-location-marker:hover .footprint-location-marker__dot,
+    .footprint-location-marker:focus-visible .footprint-location-marker__dot {
+        background: #f0a202;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(240, 162, 2, 0.28);
+    }
+
+    .footprint-profile-marker {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        overflow: visible;
+        place-items: center;
+        border: 3px solid rgba(255, 255, 255, 0.92);
+        border-radius: 50%;
+        background: #2f80ed;
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4), 0 0 0 5px rgba(47, 128, 237, 0.24);
+        color: #fff;
+        font-size: 2.4rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+            outline: none;
+            transform: translate(-50%, -50%) scale(1.08);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.46), 0 0 0 7px rgba(86, 204, 242, 0.3);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    .footprint-globe__tip--articles {
+        width: calc(100% - 28px);
+        max-width: 320px;
+        max-height: 48vh;
+        padding: 14px 16px;
+        overflow: auto;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(6, 13, 25, 0.94);
+        box-shadow: 0 22px 56px rgba(0, 0, 0, 0.5);
+        color: rgba(255, 255, 255, 0.94);
+        pointer-events: auto;
+        backdrop-filter: blur(16px);
+
+        & > span {
+            margin-top: 2px;
+            color: rgba(255, 255, 255, 0.58);
+        }
+
+        ul {
+            display: flex;
+            margin: 12px 0 0;
+            padding: 10px 0 0;
+            flex-direction: column;
+            gap: 2px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            list-style: none;
+        }
+
+        a {
+            display: block;
+            padding: 8px 6px;
+            border-radius: 5px;
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 1.25rem;
+            line-height: 1.45;
+
+            &:hover,
+            &:focus-visible {
+                background: rgba(255, 255, 255, 0.1);
+                color: #fff;
+                outline: none;
+            }
+        }
+    }
+
+    .footprint-globe__status {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    &.is-fullscreen {
+        // Expanded mode uses the avatar itself as the home marker. Suppress
+        // any legacy/stale label node left behind by hot reloads as well.
+        .footprint-profile-marker__label {
+            display: none !important;
+        }
+
+        .footprint-globe {
+            z-index: 10000;
+            box-shadow: none;
+        }
+
+        .footprint-globe__markers--preview {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .footprint-globe__expand {
+            top: calc(18px + env(safe-area-inset-top));
+            right: calc(18px + env(safe-area-inset-right));
+            width: auto;
+            min-width: 84px;
+            height: 40px;
+            padding: 0 14px;
+            gap: 6px;
+            background: rgba(7, 16, 31, 0.78);
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.36), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+
+            [data-expand-label] {
+                display: inline;
+            }
+
+            [data-expand-icon]::before {
+                content: "×";
+            }
+
+            &:hover,
+            &:focus-visible {
+                background: rgba(13, 29, 50, 0.92);
+                color: #fff;
+            }
+        }
+
+        .footprint-globe__controls {
+            display: grid;
+            right: calc(18px + env(safe-area-inset-right));
+            bottom: calc(18px + env(safe-area-inset-bottom));
+            z-index: 7;
+            background: rgba(7, 16, 31, 0.78);
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.36), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+
+            .footprint-globe__zoom,
+            .footprint-globe__control {
+                color: rgba(255, 255, 255, 0.86);
+            }
+
+            .footprint-globe__control:hover,
+            .footprint-globe__control:focus-visible {
+                background: rgba(255, 255, 255, 0.12);
+            }
+        }
+
+    }
+}
+
+.home-page {
+    .main-container > .left-sidebar,
+    .main-container > main.main,
+    .right-sidebar > .widget:not(.footprint),
+    .support-me-floating-button,
+    .widget.footprint > .widget-icon,
+    .widget.footprint > .widget-title {
+        transition: opacity 0.26s ease;
+    }
+}
+
+body.footprint-fullscreen {
+    .main-container > .left-sidebar,
+    .main-container > main.main,
+    .right-sidebar > .widget:not(.footprint),
+    .support-me-floating-button,
+    .widget.footprint > .widget-icon,
+    .widget.footprint > .widget-title {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+body.footprint-restoring {
+    .main-container > .left-sidebar,
+    .main-container > main.main,
+    .right-sidebar > .widget:not(.footprint),
+    .support-me-floating-button,
+    .widget.footprint > .widget-icon,
+    .widget.footprint > .widget-title {
+        transition: none !important;
+    }
+}
+
+.footprint-transition-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 10002;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.footprint-flight-proxy {
+    position: fixed !important;
+    z-index: 1;
+    margin: 0 !important;
+    overflow: hidden;
+    border-radius: var(--card-border-radius);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32) !important;
+    pointer-events: none !important;
+    transform-origin: center;
+    contain: layout paint style;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+
+    * {
+        pointer-events: none !important;
+    }
+}
+
+.footprint-flight-proxy--avatar {
+    border-radius: 50% !important;
+}
+
+@media (max-width: 1023px) {
+    .home-page .right-sidebar {
+        display: flex;
+
+        & > .widget:not(.footprint) {
+            display: none;
+        }
+    }
+
+    .widget.footprint.is-fullscreen {
+        .footprint-globe__tip--articles {
+            max-height: 44vh;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .widget.footprint *,
+    .footprint-transition-stage * {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+
+    .widget.footprint .footprint-globe__starfield {
+        transition: none;
     }
 }
 

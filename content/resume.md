@@ -14,8 +14,8 @@ readingTime: false
     <header class="resume-hero">
       <div class="resume-identity">
         <h1 class="resume-name">李林峰</h1>
-        <p class="resume-contact">男 | 年龄：27岁 | Niels_lee@outlook.com</p>
-        <p class="resume-intent">5年工作经验 | 求职意向：测试开发、全栈开发 | 期望城市：深圳</p>
+        <p class="resume-contact">男 | 年龄：27岁 | Niels_lee@outlook.com｜17665341260</p>
+        <p class="resume-intent">5年工作经验 | 求职意向：测试开发、全栈开发 | 期望城市：深圳 | 期望薪资：35k-40k</p>
       </div>
       <img class="resume-portrait" src="/resume/profile.png" alt="">
     </header>
