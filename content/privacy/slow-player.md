@@ -1,5 +1,5 @@
 ---
-title: '倍速播放器隐私政策'
+title: '变速播放器隐私政策'
 date: 2026-10-07T00:00:00+08:00
 lastmod: 2026-10-07T00:00:00+08:00
 draft: false
@@ -10,7 +10,7 @@ toc: true
 
 生效日期：2026 年 10 月 7 日
 
-倍速播放器（SpeedPlay，项目名 slow-player）尊重并保护用户隐私。本政策说明您使用应用时，视频、照片库信息、本地设置及购买信息的处理方式。
+变速播放器（Variable-speed player，项目名 slow-player）尊重并保护用户隐私。本政策说明您使用应用时，视频、照片库信息、本地设置及购买信息的处理方式。
 
 ## 信息收集
 
@@ -63,7 +63,7 @@ Apple 服务的数据处理遵循 [Apple 隐私政策](https://www.apple.com/leg
 
 Effective date: October 7, 2026
 
-SpeedPlay (project name: slow-player) respects your privacy. This policy explains how the app handles videos, photo-library information, local preferences, and purchase information.
+Variable-speed player (project name: slow-player) respects your privacy. This policy explains how the app handles videos, photo-library information, local preferences, and purchase information.
 
 ### Information Collection
 

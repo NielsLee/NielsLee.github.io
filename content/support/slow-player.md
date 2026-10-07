@@ -1,5 +1,5 @@
 ---
-title: '倍速播放器使用说明与技术支持'
+title: '变速播放器使用说明与技术支持'
 date: 2026-10-07T00:00:00+08:00
 lastmod: 2026-10-07T00:00:00+08:00
 draft: false
@@ -10,11 +10,11 @@ toc: true
 
 ## 使用说明
 
-倍速播放器（SpeedPlay，项目名 slow-player）是一款适用于 iOS 17 及更新版本的 iPhone 视频播放器，可长按画面变速播放，并将刚才的变速片段保存为视频或 Live Photo。
+变速播放器（Variable-speed player，项目名 slow-player）是一款适用于 iOS 17 及更新版本的 iPhone 视频播放器，可长按画面变速播放，并将刚才的变速片段保存为视频或 Live Photo。
 
 ### 1. 访问视频
 
-首次启动时，请按提示允许“完全访问”照片库。如果此前选择了有限访问或拒绝访问，请前往 iOS「设置」中的倍速播放器照片权限页面调整授权。
+首次启动时，请按提示允许“完全访问”照片库。如果此前选择了有限访问或拒绝访问，请前往 iOS「设置」中的变速播放器照片权限页面调整授权。
 
 「时间线」按拍摄日期展示视频，「收藏」展示系统照片库中已收藏的视频。点击缩略图即可播放。云朵标识表示视频尚需从 iCloud 下载，请保持网络可用并等待加载。
 
@@ -65,7 +65,7 @@ Pro 为一次性购买，可解除导出次数限制，并启用「平滑慢放�
 
 ## User Guide (English)
 
-SpeedPlay (project name: slow-player) is an iPhone video player for iOS 17 or later. Hold the video to change playback speed, then save that segment as a video or Live Photo.
+Variable-speed player (project name: slow-player) is an iPhone video player for iOS 17 or later. Hold the video to change playback speed, then save that segment as a video or Live Photo.
 
 ### 1. Open a Video
 
